@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import CreatePostForm from '../CreatePostForm'
 
 class PostContainer extends Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state = {
 			posts: []
 		}
@@ -13,7 +14,6 @@ class PostContainer extends Component {
 
 	getPosts = async () => {
 		try {//this will fetch all of the posts from our API
-			console.log("this is mu url >>> ", process.env.REACT_APP_API_URL + "/api/v1/posts/");
 			const posts = await fetch(process.env.REACT_APP_API_URL + '/api/v1/posts/');
 			//parsing the posts from the response 
 			console.log(posts);
@@ -23,9 +23,28 @@ class PostContainer extends Component {
 			console.log(err);
 		}
 	}
+
+	addPost = async(e, postFromForm) => {
+		e.preventDefault()
+		try{
+			const createdPostRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/posts', 
+			{
+				method: 'POST',
+				body: JSON.stringify(postFromForm),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			const parsedRes = await createdPostRes.json()
+			this.setState({posts: [...this.state.posts, parsedRes.data]})
+		}
+		catch(err){
+			console.log(err);
+		}
+	}
 	render(){
 		return (
-			<div>This is the PostContainer</div>
+			<CreatePostForm addPost={this.addPost}/>
 		)
 	}
 }
