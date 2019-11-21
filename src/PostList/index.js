@@ -18,8 +18,9 @@ function PostList(props){
 					<Card.Description><a href={post.image}>image</a></Card.Description>
 				</Card.Content>
 				<Card.Content extra>
-					<Button onClick={() =>  props.deletePost(post.id)}>Delete Post</Button>
+					<Button onClick={() => props.deletePost(post.id)}>Delete Post</Button>
 					<Button onClick={() => props.editPost(post.id)}>Edit Post</Button>
+					<Button onClick={() => props.addComment(post.id)}>Comments</Button>
 				</Card.Content>
 			</Card>	
 		)

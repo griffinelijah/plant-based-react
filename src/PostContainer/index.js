@@ -3,6 +3,7 @@ import PostList from '../PostList'
 import CreatePostForm from '../CreatePostForm'
 import { Grid } from 'semantic-ui-react';
 import EditPostModal from '../EditPostModal'
+import CreateComment from'../CreateComment'
 
 
 class PostContainer extends Component {
@@ -37,6 +38,30 @@ class PostContainer extends Component {
 		} catch(err) {
 			console.log(err);
 		}
+	}
+
+	addComment = async (e, newComment) => {
+		try{
+			//create comment through api route
+			const createdCommentRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/comments/', 
+			{
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify(newComment),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			const parsedCommentRes = await createdCommentRes.json()
+			console.log('\nthis is parsedCommentRes in addComment');
+			console.log(parsedCommentRes);
+			//match postid passed through addComment button to post in db and create comment on that post
+			console.log(e);
+			}
+			
+			catch(err){
+				console.log(err);
+			}
 	}
 
 	addPost = async (e, postFromForm) => { 
@@ -142,7 +167,7 @@ class PostContainer extends Component {
 	}
 	render(){
 		return (
-			<Grid columns={2} 
+			<Grid columns={3} 
 		    divided textAlign='center' 
 		    style={{ height: '100%' }} 
 		    verticalAlign='top' 
@@ -153,8 +178,12 @@ class PostContainer extends Component {
 	            <PostList 
 	            posts={this.state.posts}
 	            editPost={this.editPost}
-	            deletePost={this.deletePost}/>
+	            deletePost={this.deletePost}
+	            addComment={this.addComment}/>
 	          </Grid.Column>
+	          <Grid.Column>
+	          	<CreateComment />
+	          </Grid.Column>	
 	          <Grid.Column >
 	           <CreatePostForm addPost={this.addPost}/>
 	          </Grid.Column>
