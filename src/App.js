@@ -1,11 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+// import logo from './logo.svg';
 import './App.css';
 import PostContainer from './PostContainer'
 import LoginRegisterForm from './LoginRegisterForm'
 
 
-class App extends React.Component {
+
+class App extends Component {
   constructor(){
     super()
     this.state = {
@@ -59,12 +60,12 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         {this.state.loggedIn ? (
           <PostContainer />
-        ) : (
-              <LoginRegisterForm login={this.login} register={this.register} />
-        )}
+          ) : (
+            <LoginRegisterForm  login={this.login} register={this.register}/>
+          )}
       </div>
     )
   }
