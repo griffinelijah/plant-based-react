@@ -14,7 +14,10 @@ class PostContainer extends Component {
 
 	getPosts = async () => {
 		try {//this will fetch all of the posts from our API
-			const posts = await fetch(process.env.REACT_APP_API_URL + '/api/v1/posts/');
+			const posts = await fetch(process.env.REACT_APP_API_URL + '/api/v1/posts/',
+				{
+					credentials: 'include'
+				});
 			//parsing the posts from the response 
 			console.log(posts);
 			const parsedPosts = await posts.json();
@@ -24,12 +27,13 @@ class PostContainer extends Component {
 		}
 	}
 
-	addPost = async(e, postFromForm) => {
+	addPost = async (e, postFromForm) => {
 		e.preventDefault()
 		try{
-			const createdPostRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/posts', 
+			const createdPostRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/posts/', 
 			{
 				method: 'POST',
+				credentials: 'include',
 				body: JSON.stringify(postFromForm),
 				headers: {
 					'Content-Type': 'application/json'

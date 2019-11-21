@@ -11,14 +11,20 @@ class CreatePost extends Component {
 			image: ''
 		}
 	}
+
+	handleChange = (e) => {
+		this.setState({[e.currentTarget.name]: e.target.value})
+	}
 	render(){
 		return(
 			<Segment>
-				<h4>Create a Post</h4>
+				<h1>Create a Post</h1>
 				<Form onSubmit={(e) => this.props.addPost(e, this.state)}>
 					<Label>Title: </Label>
 					<Form.Input type='text' name='title' value={this.state.title} onChange={this.handleChange}/>
+					<Label>Description: </Label>
 					<Form.Input type='text' name='description' value={this.state.description} onChange={this.handleChange}/>
+					<Label>Image: </Label>
 					<Form.Input type='text' name='image' value={this.state.image} onChange={this.handleChange}/>
 					<Button type='submit'>Create Post</Button>
 				</Form>
