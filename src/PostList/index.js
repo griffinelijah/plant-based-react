@@ -14,6 +14,7 @@ function PostList(props){
 						<span className='user'>{post.user.username}</span>
 					</Card.Meta>
 					<Card.Description>{post.description}</Card.Description>
+					<Card.Description><a href={post.image}>image</a></Card.Description>
 				</Card.Content>
 				<Card.Content extra>
 					<Button onClick={() =>  props.deletePost(post.id)}>Delete Post</Button>

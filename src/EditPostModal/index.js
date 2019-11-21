@@ -14,12 +14,14 @@ function EditPostModal(props){
 						value={props.postToEdit.title}
 						onChange={props.handleEditChange}
 					/>
+					<Label>Description: </Label>
 					<Form.Input
 						type='text'
 						name='description'
 						value={props.postToEdit.description}
 						onChange={props.handleEditChange}
 					/>
+					<Label>Image: </Label>
 					<Form.Input
 						type='text'
 						name='image'
