@@ -34,7 +34,7 @@ class LoginRegisterForm extends Component {
 		}
 	}
 	switchForm = () => {
-		if(this.state.action === 'register'){
+		if(this.state.action === 'login'){
 			this.setState({
 				action: 'register'
 			})
