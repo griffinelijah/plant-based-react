@@ -19,7 +19,7 @@ class PostContainer extends Component {
 					credentials: 'include'
 				});
 			//parsing the posts from the response 
-			console.log(posts);
+			// console.log(posts);
 			const parsedPosts = await posts.json();
 			console.log(parsedPosts);
 		} catch(err) {

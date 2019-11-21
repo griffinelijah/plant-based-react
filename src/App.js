@@ -47,7 +47,7 @@ class App extends React.Component {
         }
       })
     const parsedRegisterRes = await res.json();
-    console.log(parsedRegisterRes);
+    // console.log(parsedRegisterRes);
     if(parsedRegisterRes.status.code === 201){
       this.setState({
         loggedIn: true,
