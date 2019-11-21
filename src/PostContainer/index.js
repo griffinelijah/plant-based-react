@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import PostList from '../PostList'
 import CreatePostForm from '../CreatePostForm'
 import { Grid } from 'semantic-ui-react';
+import EditPostModal from '../EditPostModal'
 
 
 class PostContainer extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			posts: []
+			posts: [],
+			editModalIsOpen: false,
+			postToEdit: {
+				title: '',
+				description: '',
+				image: '',
+				id: ''
+			}
 		}
 	}
 	componentDidMount(){
@@ -63,6 +71,57 @@ class PostContainer extends Component {
 			console.log(err);
 		}
 	}
+	//functioin to find post that will be edited in the updatePost
+	editPost = (idOfPost) => {
+		//tthis wll find a matching post Id from the posts in state
+		const postToEdit = this.state.posts.find(post => post.id === idOfPost)
+		this.setState({
+			editModalIsOpen: true,
+			postToEdit: {
+				...postToEdit
+			}
+		})
+	}
+
+	handleEditChange = (e) => {
+		this.setState({
+			postToEdit: {...this.state.postToEdit, [e.target.name]: e.target.value}
+		})
+	}
+
+	updatePost = async (e) => {
+		e.preventDefault();
+		try {
+			const apiUrl = process.env.REACT_APP_API_URL + '/api/v1/posts/' + this.state.postToEdit.id
+			const updatedPostRes = await fetch(apiUrl, 
+			{
+				method: 'PUT',
+				credentials: 'include',
+				body: JSON.stringify(this.state.postToEdit),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			const updatedPostResParsed = await updatedPostRes.json()
+			//map over posts in state to find post matching id of updated post
+			const newPostArrAfterUpdate = this.state.posts.map((post) => {
+				//if id's do match update that post with the new post data from the res
+				if(post.id === updatedPostResParsed.data.id){
+					post = updatedPostResParsed.data
+				} 
+				return post
+			})
+			//set state to new arr defined above that contains all posts in state and edited post after updates are made
+			this.setState({posts: newPostArrAfterUpdate})
+		} catch(err){
+			console.log(err);
+		}
+	}
+
+	//this functiono just closes the modal after updates are submitted
+	closeModal = () => {
+		this.setState({editModalIsOpen: false})
+	}
 	render(){
 		return (
 			<Grid columns={2} 
@@ -74,11 +133,19 @@ class PostContainer extends Component {
 	        <Grid.Row>
 	          <Grid.Column >
 	            <PostList 
-	            posts={this.state.posts}/>
+	            posts={this.state.posts}
+	            editPost={this.editPost}/>
 	          </Grid.Column>
 	          <Grid.Column >
 	           <CreatePostForm addPost={this.addPost}/>
 	          </Grid.Column>
+	          	<EditPostModal
+	          	open={this.state.editModalIsOpen}
+	          	updatePost={this.updatePost}
+	          	postToEdit={this.state.postToEdit}
+	          	closeModal={this.closeModal}
+	          	handleEditChange={this.handleEditChange}
+	          	/>
 	          	
 	        </Grid.Row>
         </Grid>
