@@ -113,6 +113,7 @@ class PostContainer extends Component {
 			})
 			//set state to new arr defined above that contains all posts in state and edited post after updates are made
 			this.setState({posts: newPostArrAfterUpdate})
+			this.closeModal()
 		} catch(err){
 			console.log(err);
 		}
@@ -120,7 +121,9 @@ class PostContainer extends Component {
 
 	//this functiono just closes the modal after updates are submitted
 	closeModal = () => {
-		this.setState({editModalIsOpen: false})
+		this.setState({
+			editModalIsOpen: false
+		})
 	}
 	render(){
 		return (
