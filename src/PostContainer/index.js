@@ -71,6 +71,20 @@ class PostContainer extends Component {
 			console.log(err);
 		}
 	}
+	deletePost = async (idOfPost) => {
+		const deletePostRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/posts/' + idOfPost, 
+		{
+			method: 'DELETE',
+			credentials: 'include'
+		})
+		const deletePostResParsed = await deletePostRes.json()
+		this.setState({
+			//this sets state back to include all the posts except thhe post matchng the id of the post that was just deleted
+			posts: this.state.posts.filter((post) => post.id !== idOfPost)
+		})
+
+	}
+
 	//functioin to find post that will be edited in the updatePost
 	editPost = (idOfPost) => {
 		//tthis wll find a matching post Id from the posts in state
@@ -113,6 +127,7 @@ class PostContainer extends Component {
 			})
 			//set state to new arr defined above that contains all posts in state and edited post after updates are made
 			this.setState({posts: newPostArrAfterUpdate})
+			//closeModal is called after changes are updated in state
 			this.closeModal()
 		} catch(err){
 			console.log(err);
@@ -137,7 +152,8 @@ class PostContainer extends Component {
 	          <Grid.Column >
 	            <PostList 
 	            posts={this.state.posts}
-	            editPost={this.editPost}/>
+	            editPost={this.editPost}
+	            deletePost={this.deletePost}/>
 	          </Grid.Column>
 	          <Grid.Column >
 	           <CreatePostForm addPost={this.addPost}/>
