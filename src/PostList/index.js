@@ -20,7 +20,7 @@ function PostList(props){
 				<Card.Content extra>
 					<Button onClick={() => props.deletePost(post.id)}>Delete Post</Button>
 					<Button onClick={() => props.editPost(post.id)}>Edit Post</Button>
-					<Button onClick={() => props.addComment(post.id)}>Comments</Button>
+					<Button onClick={() => props.openCommentModal(post.id)}>Comments</Button>
 				</Card.Content>
 			</Card>	
 		)

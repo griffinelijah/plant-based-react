@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Comment, Form, Header} from 'semantic-ui-react';
 
+//this component let's use a create a comment under a post by rendering a small form to submit
 class CreateComment extends Component {
 	constructor(){
 		super()
+		//all comment info is stored in state
 		this.state = {
 			user: '',
 			body: '',
