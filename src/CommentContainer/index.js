@@ -48,6 +48,30 @@ class CommentContainer extends Component {
 			})
 		}
 	}
+
+	//this will make an ajax call to the api to create aa comment
+	addComment = async (e, commentFromForm) => {
+		e.preventDefault()
+		try{
+			const createdCommentRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/comments/', 
+			{
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify(commentFromForm),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			const parsedCommentRes = await createdCommentRes.json()
+			this.setState({comments: [...this.state.comments, parsedCommentRes.data]})
+
+		} catch(err) {
+			console.log(err)
+		}
+	}
+
+
+
 	//when tryingg to render the comment modal, browser just crashes.
 	render(){
 		return(

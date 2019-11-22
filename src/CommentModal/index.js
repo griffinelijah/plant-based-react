@@ -11,7 +11,7 @@ function CommentModal(props){
 			onClose={props.closeCommentModal}
 			// trigger={props.openCommentModal}
 			>
-				<Modal.Header>Post's Pic</Modal.Header>
+				<Modal.Header>Comments</Modal.Header>
 				<Modal.Content image scrolling>
 					<p> Comments will get displayed here </p>
 				</Modal.Content>
