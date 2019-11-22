@@ -12,6 +12,7 @@ class PostContainer extends Component {
 		super(props)
 		this.state = {
 			posts: [],
+			postId: '',
 			editModalIsOpen: false,
 			//this can bee set to true to open the modal
 			commentModalIsOpen: false,
@@ -138,8 +139,9 @@ class PostContainer extends Component {
 		}
 	}
 	//this function wll open the commentModal on button click in postList
-	openCommentModal = () => {
+	openCommentModal = (postId) => {
 		this.setState({
+			postId: postId,
 			commentModalIsOpen: true
 		})
 		console.log('\nthis is this.state.comments when opening the comment modal');
@@ -182,10 +184,8 @@ class PostContainer extends Component {
 	          	this.state.commentModalIsOpen === true
 	          	?
 	          <Grid.Column>
-	          	<CommentModal 
-	          	//if this.state.commentModalIsopen is true
-
-	          	//if not 
+	          	<CommentModal
+	          	postId={this.state.postId} 
 	          	openCommentModal={this.openCommentModal}
 	          	open={this.state.commentModalIsOpen}
 	          	closeCommentModal={this.closeCommentModal}

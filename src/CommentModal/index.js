@@ -9,8 +9,6 @@ class CommentModal extends Component {
 		super(props)
 		this.state = {
 			comments: [],
-			//this is the post that the comment belongs to
-			post: [],
 			//information for updating comment is gathered here bfore storing in comment state
 			commentToEdit: {
 				body: ''
@@ -44,8 +42,9 @@ class CommentModal extends Component {
 	addComment = async (e, commentFromForm) => {
 		//prevent form from refreshing page
 		e.preventDefault()
+		console.log('we are in addComment in commentModal')
 		try{
-			const createdCommentRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/comments/', 
+			const createdCommentRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/comments/' + this.props.postId, 
 			{
 				method: 'POST',
 				credentials: 'include',
@@ -54,27 +53,32 @@ class CommentModal extends Component {
 					'Content-Type': 'application/json'
 				}
 			})
+			console.log('\nthis is createdCommentRes in addComment');
+			console.log(createdCommentRes)
 			const parsedCommentRes = await createdCommentRes.json()
+			console.log('\nthis is parsedCommentRes in addComment');
+			console.log(parsedCommentRes);
 			this.setState({comments: [...this.state.comments, parsedCommentRes.data]})
-
 		} catch(err) {
 			console.log(err)
 		}
 	}
 	
 	render(){
+		console.log('\nthis is state after fetch call before render');
+		console.log(this.state);
 		return(
 			<React.Fragment>
 				<Modal
 					open={this.props.open}
 					closeIcon
 					onClose={this.props.closeCommentModal}
-					addComment={this.addComment}
+					// addComment={this.addComment}
 					// trigger={this.props.openCommentModal}
 					>
 					<Modal.Header>Comments</Modal.Header>
 					<Modal.Content image scrolling>
-						<CommentList />
+						<CommentList comments={this.state.comments}/>
 						<CreateCommentForm addComment={this.addComment}/>
 					</Modal.Content>
 				</Modal>

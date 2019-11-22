@@ -10,8 +10,8 @@ class CreateComment extends Component {
 		//all comment info is stored in state
 		this.state = {
 			user: '',
-			body: '',
-			post: ''
+			body: ''
+			// post: ''
 		}	
 	}
 
