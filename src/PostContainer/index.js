@@ -4,8 +4,7 @@ import CreatePostForm from '../CreatePostForm'
 import { Grid } from 'semantic-ui-react';
 import EditPostModal from '../EditPostModal'
 import CommentModal from '../CommentModal'
-import CommentContainer from '../CommentContainer'
-// import CommentList from '../CommentList'
+import CommentList from '../CommentList'
 
 
 class PostContainer extends Component {
@@ -168,7 +167,7 @@ class PostContainer extends Component {
 		    stackable
 		    >
 	        <Grid.Row>
-	          <Grid.Column >
+	          <Grid.Column>
 	            <PostList 
 	            posts={this.state.posts}
 	            editPost={this.editPost}
@@ -178,13 +177,24 @@ class PostContainer extends Component {
 	            //maybe have just modal open on button click and make fetch call when state of modalIsOpen changes ttrue?
 	          />
 	          </Grid.Column>
+
+	          {
+	          	this.state.commentModalIsOpen === true
+	          	?
 	          <Grid.Column>
 	          	<CommentModal 
+	          	//if this.state.commentModalIsopen is true
+
+	          	//if not 
 	          	openCommentModal={this.openCommentModal}
 	          	open={this.state.commentModalIsOpen}
 	          	closeCommentModal={this.closeCommentModal}
 	          	/>
 	          </Grid.Column>
+	          :
+	          null
+	          }
+
 	          <Grid.Column >
 	           <CreatePostForm addPost={this.addPost}/>
 	          </Grid.Column>

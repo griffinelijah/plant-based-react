@@ -1,89 +1,94 @@
-import React, { Component } from 'react';
-import { Button, Label, Header, Modal, Comment} from 'semantic-ui-react';
-// import CommentList from'../CommentList'
-import CommentModal from '../CommentModal'
+// import React, { Component } from 'react';
+// import { Button, Label, Header, Modal, Comment} from 'semantic-ui-react';
+// import CommentModal from '../CommentModal'
+// import CommentList from '../CommentList'
+// import CreateCommentForm from '../CreateCommentForm'
 
 
-//turn iinto smart component that holds all state for comments
-//move getComments fnuction to this component
-//keep function in postcontainer just to open modal
-class CommentContainer extends Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			comments: [],
-			//this is the post that the comment belongs to
-			post: [],
-			//information for updating comment is gathered here bfore storing in comment state
-			commentToEdit: {
-				body: ''
-			}
-		}
-	}
-	componentDidMount(){
-		this.getComments();
-	}
+// //turn iinto smart component that holds all state for comments
+// //move getComments fnuction to this component
+// //keep function in postcontainer just to open modal
+// class CommentContainer extends Component {
+// 	constructor(props){
+// 		super(props)
+// 		this.state = {
+// 			comments: [],
+// 			//this is the post that the comment belongs to
+// 			post: [],
+// 			//information for updating comment is gathered here bfore storing in comment state
+// 			commentToEdit: {
+// 				body: ''
+// 			}
+// 		}
+// 	}
+// 	componentDidMount(){
+// 		this.getComments();
+// 	}
 
-	//this functioin will make a fetch call retrieve only comments belonging to ths post, we will use this to render a comment list
-	getComments = async (idOfPost) => {
-		//retrieve all comments that match the post id grabbed when selecting comments button a post
-		//if this.state.commentModalIsOpen === true then we will make the fetch call
-		//this gives us thee route for this post that the comments belong to
-		if(this.state.commentModalIsOpen === true){
-			const postForTheseComments = await fetch(process.env.REACT_APP_API_URL + '/api/v1/comments/' + idOfPost, 
-			{
-				credentials: 'include'
-			})
-			console.log('\n this is postForTheseComments in getComments');
-			console.log(postForTheseComments);
-			const postForTheseCommentsParsed = await postForTheseComments.json()
-			console.log('\n these are postForTheseCommentsParsed');
-			console.log(postForTheseCommentsParsed);
-			this.setState({
-				comments: [...this.state.comments, postForTheseCommentsParsed.data]
-			})
-		} else {
-			this.setState({
-				comments: [...this.state.comments]
-			})
-		}
-	}
+// 	//this functioin will make a fetch call retrieve only comments belonging to ths post, we will use this to render a comment list
+// 	getComments = async (idOfPost) => {
+// 		//retrieve all comments that match the post id grabbed when selecting comments button a post
+// 		//if this.state.commentModalIsOpen === true then we will make the fetch call
+// 		//this gives us thee route for this post that the comments belong to
+// 		if(this.state.commentModalIsOpen === true){
+// 			const postForTheseComments = await fetch(process.env.REACT_APP_API_URL + '/api/v1/comments/' + idOfPost, 
+// 			{
+// 				credentials: 'include'
+// 			})
+// 			console.log('\n this is postForTheseComments in getComments');
+// 			console.log(postForTheseComments);
+// 			const postForTheseCommentsParsed = await postForTheseComments.json()
+// 			console.log('\n these are postForTheseCommentsParsed');
+// 			console.log(postForTheseCommentsParsed);
+// 			this.setState({
+// 				comments: [...this.state.comments, postForTheseCommentsParsed.data]
+// 			})
+// 		} else {
+// 			this.setState({
+// 				comments: [...this.state.comments]
+// 			})
+// 		}
+// 	}
 
-	//this will make an ajax call to the api to create aa comment
-	addComment = async (e, commentFromForm) => {
-		e.preventDefault()
-		try{
-			const createdCommentRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/comments/', 
-			{
-				method: 'POST',
-				credentials: 'include',
-				body: JSON.stringify(commentFromForm),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
-			const parsedCommentRes = await createdCommentRes.json()
-			this.setState({comments: [...this.state.comments, parsedCommentRes.data]})
+// 	//this will make an ajax call to the api to create aa comment
+// 	addComment = async (e, commentFromForm) => {
+// 		//prevent form from refreshing page
+// 		e.preventDefault()
+// 		try{
+// 			const createdCommentRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/comments/', 
+// 			{
+// 				method: 'POST',
+// 				credentials: 'include',
+// 				body: JSON.stringify(commentFromForm),
+// 				headers: {
+// 					'Content-Type': 'application/json'
+// 				}
+// 			})
+// 			const parsedCommentRes = await createdCommentRes.json()
+// 			this.setState({comments: [...this.state.comments, parsedCommentRes.data]})
 
-		} catch(err) {
-			console.log(err)
-		}
-	}
+// 		} catch(err) {
+// 			console.log(err)
+// 		}
+// 	}
+
+// 	//when tryingg to render the comment modal, browser just crashes.
+// 	render(){
+// 		return(
+// 			<React.Fragment>
+// 				<CommentModal
+// 					addComment={this.addComment}
+// 					/>
+// 				<CreateCommentForm
+// 					addComment={this.addComment} 
+// 					/>
+// 				<CommentList
+// 					addComment={this.addComment}
+// 				/>
+// 			</React.Fragment>
+// 		)
+// 	}
+// }
 
 
-
-	//when tryingg to render the comment modal, browser just crashes.
-	render(){
-		return(
-			<div>
-				<CommentModal 
-					open={this.state.commentModalIsOpen}
-					closeCommentModal={this.closeCommentModal}
-					comments={this.state.comments} />
-			</div>
-		)
-	}
-}
-
-
-export default CommentContainer
+// export default CommentContainer
