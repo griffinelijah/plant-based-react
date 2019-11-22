@@ -7,9 +7,16 @@ function CommentList(props){
 	if (props.comments !== undefined){
 		comments = props.comments.map((comment) => {
 			return(
-				<div>
-					<span>{comment.body} </span>
-				</div>
+				<Comment.Group key={comment.id}>
+			    <Header as='h3' dividing>
+			    </Header>
+		    <Comment>
+		      <Comment.Content>
+		        <Comment.Author as='a'>{comment.user.username}</Comment.Author>
+		        <Comment.Text>{comment.body}</Comment.Text>
+		      </Comment.Content>
+		    </Comment>
+		    </Comment.Group>
 			)
 		})
 	} else {
