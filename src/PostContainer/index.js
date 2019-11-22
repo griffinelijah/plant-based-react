@@ -152,6 +152,12 @@ class PostContainer extends Component {
 			editModalIsOpen: false
 		})
 	}
+		//this function will set modal state to false so it can be closed
+	closeCommentModal = () => {
+		this.setState({
+			commentModalIsOpen: false
+		})
+	}
 
 	render(){
 		return (
@@ -176,6 +182,7 @@ class PostContainer extends Component {
 	          	<CommentModal 
 	          	openCommentModal={this.openCommentModal}
 	          	open={this.state.commentModalIsOpen}
+	          	closeCommentModal={this.closeCommentModal}
 	          	/>
 	          </Grid.Column>
 	          <Grid.Column >

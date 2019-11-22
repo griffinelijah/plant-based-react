@@ -23,12 +23,6 @@ class CommentContainer extends Component {
 	componentDidMount(){
 		this.getComments();
 	}
-	//this function will set modal state to false so it can be closed
-	closeCommentModal = () => {
-		this.setState({
-			commentModalIsOpen: false
-		})
-	}
 
 	//this functioin will make a fetch call retrieve only comments belonging to ths post, we will use this to render a comment list
 	getComments = async (idOfPost) => {
