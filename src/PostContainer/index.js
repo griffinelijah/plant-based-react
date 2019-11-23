@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PostList from '../PostList'
 import CreatePostForm from '../CreatePostForm'
-import { Grid } from 'semantic-ui-react';
+import { Grid, Button } from 'semantic-ui-react';
 import EditPostModal from '../EditPostModal'
 import CommentModal from '../CommentModal'
 import CommentList from '../CommentList'

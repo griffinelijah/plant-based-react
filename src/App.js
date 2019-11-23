@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import PostContainer from './PostContainer'
 import LoginRegisterForm from './LoginRegisterForm'
-
+import { Form, Message, Button } from 'semantic-ui-react'
 
 
 
@@ -12,7 +12,8 @@ class App extends Component {
     super()
     this.state = {
       loggedIn: false,
-      loggedInUserEmail: null
+      loggedInUserEmail: null,
+      loginCode: null
     }
   }
 
@@ -30,9 +31,13 @@ class App extends Component {
     if(parsedLoginRes.status.code === 200){
       this.setState({
         loggedIn: true,
-        loggedInUserEmail: parsedLoginRes.data.email
+        loggedInUserEmail: parsedLoginRes.data.email,
+        loginCode: 200
       });
     } else {
+      this.setState({
+        loginCode: 401
+      })
       console.log('login failed');
     }
   }
@@ -62,6 +67,11 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
+      {this.state.loggedIn ?
+        <Button className='logout-button'>Logout</Button>
+        :
+        null
+      }
         {this.state.loggedIn ? (
           <PostContainer />
           ) : (

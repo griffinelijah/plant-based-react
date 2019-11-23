@@ -24,7 +24,7 @@ class CreatePost extends Component {
 					<Form.Input type='text' name='title' value={this.state.title} onChange={this.handleChange}/>
 					<Label>Description: </Label>
 					<Form.Input type='text' name='description' value={this.state.description} onChange={this.handleChange}/>
-					<Label>Image: </Label>
+					<Label>Image Link: </Label>
 					<Form.Input type='text' name='image' value={this.state.image} onChange={this.handleChange}/>
 					<Button type='submit'>Create Post</Button>
 				</Form>
