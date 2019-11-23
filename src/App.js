@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import './index.css'
 import PostContainer from './PostContainer'
 import LoginRegisterForm from './LoginRegisterForm'
 import { Form, Message, Button } from 'semantic-ui-react'
-
-
 
 class App extends Component {
   constructor(){
@@ -64,6 +63,27 @@ class App extends Component {
       console.log('registration failed');
     }
   }
+  logout = async () => {
+    //this will let user logout from website
+    const res = await fetch(
+      process.env.REACT_APP_API_URL + '/api/v1/users/logout', 
+      {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    const parsedLogoutRes = await res.json();
+    if(parsedLogoutRes.status.code === 200){
+      this.setState({
+        loggedIn: false
+      })
+    } else {
+      console.log('logout failed');
+    }
+  }
   render() {
     return (
       <div className='App'>
@@ -80,7 +100,7 @@ class App extends Component {
           null
         }
       {this.state.loggedIn ?
-        <Button className='logout-button'>Logout</Button>
+        <Button onClick={this.logout} className='logout-button'>Logout</Button>
         :
         null
       }
