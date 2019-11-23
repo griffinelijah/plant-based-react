@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       loggedInUserEmail: null,
-      loginCode: null
+      loginCode: 200
     }
   }
 
@@ -67,6 +67,18 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
+        {this.state.loginCode === 401
+          ?
+          <Form error>
+            <Message
+              error
+              header='Login Failed'
+              content='Username or Password is incorrect'
+            />
+          </Form>
+          :
+          null
+        }
       {this.state.loggedIn ?
         <Button className='logout-button'>Logout</Button>
         :
