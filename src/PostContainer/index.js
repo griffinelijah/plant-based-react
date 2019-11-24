@@ -20,7 +20,8 @@ class PostContainer extends Component {
 				title: '',
 				description: '',
 				image: '',
-				id: ''
+				id: '',
+				loggedInUserEmail: this.props.userEmail
 			}
 		}
 	}
@@ -92,14 +93,19 @@ class PostContainer extends Component {
 
 	//functioin to find post that will be edited in the updatePost
 	editPost = (idOfPost) => {
-		//tthis wll find a matching post Id from the posts in state
-		const postToEdit = this.state.posts.find(post => post.id === idOfPost)
-		this.setState({
-			editModalIsOpen: true,
-			postToEdit: {
-				...postToEdit
-			}
-		})
+		console.log(this.state.postToEdit);
+		// if(this.state.postToEdit.loggedInUserEmail === this.props.userEmail){
+			//tthis wll find a matching post Id from the posts in state
+			const postToEdit = this.state.posts.find(post => post.id === idOfPost)
+			this.setState({
+				editModalIsOpen: true,
+				postToEdit: {
+					...postToEdit
+				}
+			})
+		// } else {
+		// 	console.log('You must be the owner of this post to edit it');
+		// }
 	}
 
 	handleEditChange = (e) => {

@@ -7,8 +7,8 @@ import LoginRegisterForm from './LoginRegisterForm'
 import { Form, Message, Button } from 'semantic-ui-react'
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       loggedIn: false,
       loggedInUserEmail: null,
@@ -100,12 +100,14 @@ class App extends Component {
           null
         }
       {this.state.loggedIn ?
-        <Button onClick={this.logout} className='logout-button'>Logout</Button>
+        <React.Fragment>
+          <Button onClick={this.logout} className='logout-button'>Logout</Button>
+        </React.Fragment>
         :
         null
       }
         {this.state.loggedIn ? (
-          <PostContainer />
+          <PostContainer userEmail={this.state.loggedInUserEmail}/>
           ) : (
             <LoginRegisterForm  login={this.login} register={this.register}/>
           )}
