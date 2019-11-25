@@ -64,7 +64,19 @@ class CommentModal extends Component {
 			console.log(err)
 		}
 	}
-	
+
+	deleteComment = async (commentid) => {
+		const deletedCommentRes = await fetch(process.env.REACT_APP_API_URL + '/api/v1/comments/' +
+			commentid, 
+			{
+				method: 'DELETE',
+				credentials: 'include'
+			})
+		const deletedCommentResParsed = await deletedCommentRes.json()
+		this.setState({
+			comments: this.state.comments.filter((comment) => comment.id !== commentid)
+		})
+	}
 	render(){
 		console.log('\nthis is state after fetch call before render');
 		console.log(this.state);
@@ -78,7 +90,9 @@ class CommentModal extends Component {
 					<Modal.Header>Comments</Modal.Header>
 					<Modal.Content image scrolling className='commentModal'>
 						<div className='commentList'>
-							<CommentList comments={this.state.comments}/>
+							<CommentList 
+							deleteComment={this.deleteComment}
+							comments={this.state.comments} />
 						</div>
 							<CreateCommentForm addComment={this.addComment}/>
 					</Modal.Content>
