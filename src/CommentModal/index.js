@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react';
 import CommentList from '../CommentList'
 import CreateCommentForm from '../CreateCommentForm'
+import '../index.css'
 
 //turning commendModal inot smart comment to hold everything from commentContainer and render modal 
 class CommentModal extends Component {
@@ -73,20 +74,15 @@ class CommentModal extends Component {
 					open={this.props.open}
 					closeIcon
 					onClose={this.props.closeCommentModal}
-					// addComment={this.addComment}
-					// trigger={this.props.openCommentModal}
 					>
 					<Modal.Header>Comments</Modal.Header>
-					<Modal.Content image scrolling>
-						<CommentList comments={this.state.comments}/>
-						<CreateCommentForm addComment={this.addComment}/>
+					<Modal.Content image scrolling className='commentModal'>
+						<div className='commentList'>
+							<CommentList comments={this.state.comments}/>
+						</div>
+							<CreateCommentForm addComment={this.addComment}/>
 					</Modal.Content>
 				</Modal>
-				<CreateCommentForm
-					addComment={this.addComment} 
-					/>
-				<CommentList
-				/>
 			</React.Fragment>
 		)
 	}

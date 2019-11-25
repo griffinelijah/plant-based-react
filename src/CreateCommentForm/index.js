@@ -21,9 +21,9 @@ class CreateComment extends Component {
 	render(){
 		return (
 			<Form onSubmit={(e) => this.props.addComment(e, this.state)}>
-				<Form.Input type='text' name='body' value={this.state.body}
+				<Form.Input className='commentForm' type='text' name='body' value={this.state.body}
 					onChange={this.handleChange}/>
-				<Button type='submit'>Create Comment</Button>
+				<Button className='commentFormButton' type='submit'>Create Comment</Button>
 			</Form>
 		)
 	}

@@ -27,3 +27,39 @@ code {
 	height: 200px;
 	width: 200px;
 }
+
+.postList {
+  height: 25%;
+  width: 35%;
+}
+
+.commentList {
+  height: 180px;
+  width: 725px;
+}
+
+.commentForm {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 550px;
+}
+
+.commentFormButton {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.commentModal {
+  height: 400px;
+}
+
+
+
+
+
+
+
+
+

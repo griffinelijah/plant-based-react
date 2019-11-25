@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Button, Image } from 'semantic-ui-react';
+import '../index.css'
 
 function PostList(props){
 	//it's possibly posts are not being iterated over correctly and displaying each individual prop so its trying to render an entire object at once.
@@ -7,7 +8,7 @@ function PostList(props){
 	console.log(props.posts);
 	const posts = props.posts.map((post) => {
 		return(
-			<Card key={post.id} >
+			<Card key={post.id} className='postList'>
 				<Image src={post.image} wrapped ui={false} />
 				<Card.Content>
 					<Card.Header>{post.title}</Card.Header>
