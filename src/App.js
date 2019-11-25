@@ -4,7 +4,8 @@ import './App.css';
 import './index.css'
 import PostContainer from './PostContainer'
 import LoginRegisterForm from './LoginRegisterForm'
-import { Form, Message, Button } from 'semantic-ui-react'
+import { Form, Message, Button, Input, Menu } from 'semantic-ui-react'
+// import MenuContainer from './MenuContainer'
 
 class App extends Component {
   constructor(props){
@@ -12,7 +13,8 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       loggedInUserEmail: null,
-      loginCode: 200
+      loginCode: 200,
+      activeItem: 'home'
     }
   }
 
@@ -84,9 +86,22 @@ class App extends Component {
       console.log('logout failed');
     }
   }
+
+  buttonAction = () => {
+    if(this.state.activeItem === 'home'){
+      console.log('home');
+    } else if(this.state.activeItem === 'create post'){
+      console.log('create post');
+    } else if(this.state.activeItem === 'logout'){
+      this.logout()
+    }
+  }
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name }, this.buttonAction)
+
   render() {
+    const { activeItem } = this.state
     return (
-      <div className='App'>
+       <div className='App'>
         {this.state.loginCode === 401
           ?
           <Form error>
@@ -99,15 +114,27 @@ class App extends Component {
           :
           null
         }
-      {this.state.loggedIn ?
-        <React.Fragment>
-          <Button onClick={this.logout} className='logout-button'>Logout</Button>
-        </React.Fragment>
-        :
-        null
-      }
         {this.state.loggedIn ? (
+          <React.Fragment>
+           <Menu secondary>
+        <Menu.Item
+          name='home'
+          active={activeItem === 'home'}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
+          name='create post'
+          active={activeItem === 'create post'}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item
+          name='logout'
+          active={activeItem === 'logout'}
+          onClick={this.handleItemClick} 
+        />
+      </Menu>
           <PostContainer userEmail={this.state.loggedInUserEmail}/>
+          </React.Fragment>
           ) : (
             <LoginRegisterForm  login={this.login} register={this.register}/>
           )}

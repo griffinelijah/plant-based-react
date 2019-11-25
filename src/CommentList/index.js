@@ -14,7 +14,7 @@ function CommentList(props){
 		      <Comment.Content>
 		        <Comment.Author as='a'>{comment.user.username}</Comment.Author>
 		        <Comment.Text>{comment.body}</Comment.Text>
-		        <Button onClick={() => props.deleteComment(comment.id)}>Delete Comment</Button>
+		        <Button size='mini'onClick={() => props.deleteComment(comment.id)}>Delete Comment</Button>
 		      </Comment.Content>
 		    </Comment>
 		    </Comment.Group>

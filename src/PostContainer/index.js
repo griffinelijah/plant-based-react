@@ -5,6 +5,7 @@ import { Grid, Button } from 'semantic-ui-react';
 import EditPostModal from '../EditPostModal'
 import CommentModal from '../CommentModal'
 import CommentList from '../CommentList'
+import MenuContainer from '../MenuContainer'
 
 
 class PostContainer extends Component {
