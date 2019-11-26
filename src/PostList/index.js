@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Image } from 'semantic-ui-react';
+import { Card, Button, Image, Rating } from 'semantic-ui-react';
 import '../index.css'
 
 function PostList(props){
@@ -17,6 +17,7 @@ function PostList(props){
 					</Card.Meta>
 					<Card.Description>{post.description}</Card.Description>
 					<Card.Description><a href={post.image}>image</a></Card.Description>
+					<Rating icon='heart' defaultRating={0} maxRating={1} />
 				</Card.Content>
 				<Card.Content extra>
 					<span>{post.created}</span>

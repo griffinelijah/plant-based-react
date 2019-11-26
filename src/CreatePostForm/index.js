@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Label, Segment } from 'semantic-ui-react'
+import '../index.css'
+
 
 class CreatePost extends Component {
 	constructor(){
@@ -17,9 +19,10 @@ class CreatePost extends Component {
 	}
 	render(){
 		return(
+			<div className='postForm'>
 			<Segment>
 				<h1>Create a Post</h1>
-				<Form onSubmit={(e) => this.props.addPost(e, this.state)}>
+				<Form size='tiny'onSubmit={(e) => this.props.addPost(e, this.state)}>
 					<Label>Title: </Label>
 					<Form.Input type='text' name='title' value={this.state.title} onChange={this.handleChange}/>
 					<Label>Description: </Label>
@@ -29,6 +32,7 @@ class CreatePost extends Component {
 					<Button type='submit' color='green'>Create Post</Button>
 				</Form>
 			</Segment>
+			</div>
 		)
 	}
 }
