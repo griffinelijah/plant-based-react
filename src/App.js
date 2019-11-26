@@ -5,7 +5,7 @@ import './index.css'
 import PostContainer from './PostContainer'
 import LoginRegisterForm from './LoginRegisterForm'
 import { Form, Message, Button, Input, Menu } from 'semantic-ui-react'
-// import MenuContainer from './MenuContainer'
+
 
 class App extends Component {
   constructor(props){
@@ -102,6 +102,7 @@ class App extends Component {
     const { activeItem } = this.state
     return (
        <div className='App'>
+        <h1 className='title'>Plant-Based</h1>
         {this.state.loginCode === 401
           ?
           <Form error>
@@ -120,11 +121,6 @@ class App extends Component {
         <Menu.Item
           name='home'
           active={activeItem === 'home'}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Item
-          name='create post'
-          active={activeItem === 'create post'}
           onClick={this.handleItemClick}
         />
         <Menu.Item

@@ -23,7 +23,7 @@ class CreateComment extends Component {
 			<Form onSubmit={(e) => this.props.addComment(e, this.state)}>
 				<Form.Input className='commentForm' type='text' name='body' value={this.state.body}
 					onChange={this.handleChange}/>
-				<Button className='commentFormButton' type='submit'>Create Comment</Button>
+				<Button className='commentFormButton' color='green' type='submit'>Create Comment</Button>
 			</Form>
 		)
 	}

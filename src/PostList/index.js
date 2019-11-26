@@ -13,15 +13,16 @@ function PostList(props){
 				<Card.Content>
 					<Card.Header>{post.title}</Card.Header>
 					<Card.Meta>
-						<span className='user'>{post.user.username}</span>
+						<span className='user'>{post.user.username}</span><br/>
 					</Card.Meta>
 					<Card.Description>{post.description}</Card.Description>
 					<Card.Description><a href={post.image}>image</a></Card.Description>
 				</Card.Content>
 				<Card.Content extra>
-					<Button onClick={() => props.deletePost(post.id)}>Delete Post</Button>
-					<Button onClick={() => props.editPost(post.id)}>Edit Post</Button>
-					<Button onClick={() => props.openCommentModal(post.id)}>Comments</Button>
+					<span>{post.created}</span>
+					<Button size='tiny'className='postButtons'color='red' onClick={() => props.deletePost(post.id)}>Delete Post</Button>
+					<Button size='tiny' color='yellow' onClick={() => props.editPost(post.id)}>Edit Post</Button>
+					<Button size='tiny' color='olive' onClick={() => props.openCommentModal(post.id)}>Comments</Button>
 				</Card.Content>
 			</Card>	
 		)

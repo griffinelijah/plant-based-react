@@ -5,6 +5,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url(https://images.unsplash.com/photo-1531143649673-c46c71c7bbd2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
 }
 
 code {
@@ -34,8 +43,9 @@ code {
 }
 
 .commentList {
-  height: 180px;
+  height: 200px;
   width: 725px;
+
 }
 
 .commentForm {
@@ -53,8 +63,12 @@ code {
 
 .commentModal {
   height: 400px;
+  width: 600px;
 }
 
+.postButtons {
+  margin: 10px;
+}
 
 
 
